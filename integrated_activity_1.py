@@ -28,5 +28,22 @@ startPosition endPosition (for longest common substring between stream files)
 '''
 
 def longest_prefix_suffix(pattern):
-    pass
+    len_prefix = len(pattern)
+    lps = [0 for _ in range(len_prefix)]
+    j = 0
+    i = 1
+    while i < len_prefix:
+        if pattern[i] == pattern[j]:
+            j += 1
+            lps[i] = j
+            i += 1
+        else:
+            if j != 0:
+                j = lps[j-1]
+            else:
+                lps[i] = 0
+                i += 1
+    return lps
 
+def kmp_algorithm(transmission, pattern):
+    pass
