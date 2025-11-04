@@ -8,10 +8,6 @@ Analysis and Design of Advanced Algorithms (Gpo 651)
 Professor Salvador E. Venegas-Andraca
 """
 
-#TO DOES:
-# part 1: look for malicious pattern in transmission
-# part 2: look for mirrored code within transmission file, output longest palindrome
-# part 3: look for longest common susbtring between both files, output start + end of first file
 '''
 part 1 
 (true | false) if the file transmission1.txt contains the code (sequence of chars) contained in the file mcode1.txt     
@@ -45,5 +41,41 @@ def longest_prefix_suffix(pattern):
                 i += 1
     return lps
 
-def kmp_algorithm(transmission, pattern):
+def kmp_algorithm(main_string, pattern):
+    i = 0
+    j = 0
+    m = len(pattern)
+    n = len(main_string)
+    prefix_array = longest_prefix_suffix(pattern)
+    loc_array = []
+    while i < n:
+        i += 1
+        j += 1
+        if j == m:
+            loc_array.append(i-j)
+            j = prefix_array[j-1]
+        elif i < n and pattern[j] != main_string[i]:
+            if j != 0:
+                j = prefix_array[j-1]
+    return loc_array
+
+def manachers_algorithm():
     pass
+
+#FILES
+transmission_files = ["transmission1.txt","transmission2.txt"]
+malicious_codes = ["mcode1.txt","mcode2.txt","mcode3.txt"]
+
+#PART 1: FINDING MALICIOUS CODE PATTERN
+for transmission in transmission_files:
+    with open(transmission, "r") as transmission_file:
+        content = transmission_file.readline().strip()
+        for malicious_code in malicious_codes:
+            with open(malicious_code, "r") as malicious_file:
+                result = kmp_algorithm(content, malicious_file.readline().strip())
+                print(f"File {transmission}: {result != []} {result} for malicious code in file {malicious_code}")
+
+#PART 2: LONGEST PALINDROME IN TRANSMISSIONS
+
+
+#PART 3: LONGEST COMMON SUBSTRING BETWEEN BOTH TRANSMISSIONS
