@@ -88,9 +88,8 @@ class State:
         self.link = -1
         self.next = {}
 
-
 class SuffixAutomaton:
-    def __init__(self, maxlen=100000):
+    def __init__(self, maxlen=9000000):
         self.st = [State() for _ in range(maxlen * 2)]
         self.sz = 1
         self.last = 0
@@ -152,10 +151,12 @@ class SuffixAutomaton:
             if l > best:
                 best = l
                 bestpos = i
-        return s2[bestpos - best + 1 : bestpos + 1]
+        print(f"Longest common substring found at index: {bestpos-best+1} to {bestpos}")
 
-
-
-
+print("PART 3")
+transmission_strings = []
+for transmission_file in transmission_files: 
+    with open(transmission_file, "r") as transmission:
+        transmission_strings.append(transmission.readline().strip())
 trail = SuffixAutomaton()
-print(trail.longest_common_substring("papragacutirimicuarolocochon","fjdaslocokpapragacutirfdslfds"))
+trail.longest_common_substring(transmission_strings[1], transmission_strings[0])
