@@ -93,6 +93,7 @@ class SuffixAutomaton:
     def __init__(self, maxlen=100000):
         self.st = [State() for _ in range(maxlen * 2)]
         self.sz = 1
+        self.last = 0
     
     def sa_extend(self, c):
         cur = self.sz
@@ -130,11 +131,31 @@ class SuffixAutomaton:
         for ch in s:
             self.sa_extend(ch)
 
-def longest_common_substring():
-    pass
+    def longest_common_substring(self, s1, s2):
+        self.build(s1)
+        v = 0
+        l = 0
+        best = 0
+        bestpos = 0
+        for i in range(len(s2)):
+            c = s2[i]
+            while v != -1 and c not in self.st[v].next:
+                v = self.st[v].link
+                l = self.st[v].len if v != -1 else 0
+            if v != -1 and c in self.st[v].next:
+                v = self.st[v].next[c]
+                l += 1
+            else:
+                v = 0
+                l = 0
+
+            if l > best:
+                best = l
+                bestpos = i
+        return s2[bestpos - best + 1 : bestpos + 1]
 
 
-'''
-trail = Suffix_Automaton()
-print(trail.st)
-'''
+
+
+trail = SuffixAutomaton()
+print(trail.longest_common_substring("papragacutirimicuarolocochon","fjdaslocokpapragacutirfdslfds"))
