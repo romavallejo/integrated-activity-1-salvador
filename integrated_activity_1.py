@@ -8,21 +8,6 @@ Analysis and Design of Advanced Algorithms (Gpo 651)
 Professor Salvador E. Venegas-Andraca
 """
 
-'''
-part 1 
-(true | false) if the file transmission1.txt contains the code (sequence of chars) contained in the file mcode1.txt     
-(true | false) if the file transmission1.txt contains the code (sequence of chars) contained in the file mcode2.txt 
-(true | false) if the file transmission1.txt contains the code (sequence of chars) contained in the file mcode3.txt 
-(true | false) if the file transmission2.txt contains the code (sequence of chars) contained in the file mcode1.txt 
-(true | false) if the file transmission2.txt contains the code (sequence of chars) contained in the file mcode2.txt 
-(true | false) if the file transmission2.txt contains the code (sequence of chars) contained in the file mcode3.txt 
-part2 
-startPosition endPosition (for transmission1 file) 
-startPosition endPosition (for transmission2 file) 
-part3 
-startPosition endPosition (for longest common substring between stream files) 
-'''
-
 #FILES
 transmission_files = ["transmission1.txt","transmission2.txt"]
 malicious_codes = ["mcode1.txt","mcode2.txt","mcode3.txt"]
@@ -64,7 +49,7 @@ def kmp_algorithm(main_string, pattern):
             if j != 0:
                 j = prefix_array[j-1]
     return loc_array
-'''
+
 print("PART 1")
 for transmission in transmission_files:
     with open(transmission, "r") as transmission_file:
@@ -73,12 +58,20 @@ for transmission in transmission_files:
             with open(malicious_code, "r") as malicious_file:
                 result = kmp_algorithm(content, malicious_file.readline().strip())
                 print(f"File {transmission}: {result != []} {result} for malicious code in file {malicious_code}")
-'''
+
 
 #PART 2: LONGEST PALINDROME IN TRANSMISSIONS
 
 def manachers_algorithm():
     pass
+
+'''
+part2 
+startPosition endPosition (for transmission1 file) 
+startPosition endPosition (for transmission2 file) 
+'''
+
+print("PART 3")
 
 #PART 3: LONGEST COMMON SUBSTRING BETWEEN BOTH TRANSMISSIONS
 
@@ -89,7 +82,7 @@ class State:
         self.next = {}
 
 class SuffixAutomaton:
-    def __init__(self, maxlen=9000000):
+    def __init__(self, maxlen=7000000):
         self.st = [State() for _ in range(maxlen * 2)]
         self.sz = 1
         self.last = 0
