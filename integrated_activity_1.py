@@ -71,7 +71,7 @@ startPosition endPosition (for transmission1 file)
 startPosition endPosition (for transmission2 file) 
 '''
 
-print("PART 3")
+print("PART 2")
 
 #PART 3: LONGEST COMMON SUBSTRING BETWEEN BOTH TRANSMISSIONS
 
@@ -144,7 +144,7 @@ class SuffixAutomaton:
             if l > best:
                 best = l
                 bestpos = i
-        print(f"Longest common substring found at index: {bestpos-best+1} to {bestpos}")
+        print(f"Longest common substring found at index: {bestpos-best+1} to {bestpos} of first transmission file")
 
 print("PART 3")
 transmission_strings = []
